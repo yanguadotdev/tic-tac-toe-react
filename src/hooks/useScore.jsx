@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { TURNS } from '../constants'
-import { getItemFromStorage, saveScoreToStorage } from '../storage'
+import { clearScoreFromStorage, getItemFromStorage, saveScoreToStorage } from '../storage'
 
 export function useScore ({ winner }) {
   const scoreFromStorage = getItemFromStorage({
@@ -10,6 +10,13 @@ export function useScore ({ winner }) {
   const [oWins, setOWins] = useState(() => scoreFromStorage && scoreFromStorage.oWins)
   const [xWins, setXWins] = useState(() => scoreFromStorage && scoreFromStorage.xWins)
   const [draws, setDraws] = useState(() => scoreFromStorage && scoreFromStorage.draws)
+
+  const resetScore = () => {
+    clearScoreFromStorage()
+    setOWins(0)
+    setXWins(0)
+    setDraws(0)
+  }
 
   useEffect(() => {
     if (winner !== null) {
@@ -29,5 +36,5 @@ export function useScore ({ winner }) {
     })
   }, [oWins, xWins, draws])
 
-  return { oWins, xWins, draws, setOWins, setXWins, setDraws }
+  return { oWins, xWins, draws, resetScore }
 }

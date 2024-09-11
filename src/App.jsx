@@ -7,14 +7,12 @@ import { useScore } from './hooks/useScore.jsx'
 import { Footer } from './components/Footer.jsx'
 
 function App () {
-  const { board, updateBoard, resetGame, turn, winner } = useTicTacToe()
-  const { oWins, xWins, draws, setOWins, setXWins, setDraws } = useScore({ winner })
+  const { board, updateBoard, startAgain, turn, winner } = useTicTacToe()
+  const { oWins, xWins, draws, resetScore } = useScore({ winner })
 
-  const resetAllGame = () => {
-    resetGame()
-    setOWins(0)
-    setXWins(0)
-    setDraws(0)
+  const resetGame = () => {
+    startAgain()
+    resetScore()
   }
 
   return (
@@ -23,9 +21,9 @@ function App () {
       <Score oWins={oWins} xWins={xWins} draws={draws} />
       <Board board={board} updateBoard={updateBoard} />
       <Turn turn={turn} />
-      <Footer reset={resetAllGame} />
+      <Footer resetGame={resetGame} />
 
-      <WinnerModal winner={winner} resetGame={resetGame} />
+      <WinnerModal winner={winner} startAgain={startAgain} />
     </main>
   )
 }

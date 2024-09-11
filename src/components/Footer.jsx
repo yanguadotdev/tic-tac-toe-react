@@ -1,9 +1,9 @@
 import { RepeatIcon, SettingIcon } from './Icons'
 
-export function Footer ({ reset }) {
+export function Footer ({ resetGame }) {
   return (
     <footer>
-      <button onClick={reset}>
+      <button onClick={resetGame}>
         <RepeatIcon />
       </button>
 

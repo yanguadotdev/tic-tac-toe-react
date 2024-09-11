@@ -1,16 +1,16 @@
 /* eslint-disable react/prop-types */
-import { Square } from './Square.jsx'
 import { TURNS } from '../constants.js'
+import { OIcon, XIcon } from './Icons.jsx'
 
 export function Turn ({ turn }) {
   return (
     <section className='turn'>
-      <Square isSelected={turn === TURNS.X}>
-        {TURNS.X}
-      </Square>
-      <Square isSelected={turn === TURNS.O}>
-        {TURNS.O}
-      </Square>
+      <div className={turn === TURNS.X ? 'is-turn' : ''}>
+        <XIcon />
+      </div>
+      <div className={turn === TURNS.O ? 'is-turn' : ''}>
+        <OIcon />
+      </div>
     </section>
   )
 }

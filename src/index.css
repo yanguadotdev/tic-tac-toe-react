@@ -4,10 +4,8 @@
   line-height: 24px;
   font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
+  color-scheme: dark light;
+  
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -19,25 +17,35 @@ body {
   margin: 0;
   display: flex;
   justify-content: center;
+  align-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background-color: #FEFEFE;
+  color: #59728a;
+  font-family: 'Rubik', sans-serif;
 }
 
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  font: inherit;
 }
 
 .board {
   width: fit-content;
-  margin: 40px auto;
+  margin: auto;
   text-align: center;
+  border: 1px solid #36bbd3;
+  padding: 1.5rem;
+  border-radius: .25rem;
+  box-shadow: 0 0 32px 8px #36bbd311;
 }
 
 .board h1 {
-  color: #eee;
   margin-bottom: 16px;
+  font-weight: 800;
+  font-size: 2rem;
 }
 
 .board button {
@@ -64,6 +72,29 @@ body {
   gap: 10px;
 }
 
+.game-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-block: 1.5rem 2rem;
+
+  > div {
+    flex: 1;
+    height: 48px;
+    display: grid;
+    place-items: center;
+    font-weight: 600;
+  }
+
+  .score--o {
+    color: #30c9e3;
+  }
+
+  .score--x {
+    color: #2785dd;
+  }
+}
+
 .turn {
   display: flex;
   justify-content: center;
@@ -73,12 +104,31 @@ body {
   border-radius: 10px;
 }
 
-.turn .square,
 .winner .square {
   width: 70px;
   height: 70px;
   pointer-events: none;
   border-color: transparent;
+}
+
+.turn {
+  border-radius: 100vh;
+  border: 1px solid #59728a55;
+}
+
+.turn > div {
+  font-size: 1rem;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  cursor: default;
+  border-radius: 50%;
+  display: grid;
+  place-content: center;
+  &.is-turn {
+    color: #fff;
+    background-color: #30c9e3;
+  }
 }
 
 .square.is-selected {
@@ -128,4 +178,5 @@ body {
   place-items: center;
   cursor: pointer;
   font-size: 48px;
+  /* color: #30c9e3; */
 }

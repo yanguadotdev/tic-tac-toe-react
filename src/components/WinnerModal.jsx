@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
-import { RepeatIcon } from './Icons.jsx'
+import { RestartIcon } from './Icons.jsx'
 import { Square } from './Square.jsx'
 
-export function WinnerModal ({ winner, resetGame }) {
+export function WinnerModal ({ winner, startAgain }) {
   if (winner === null) return null
 
   const winnerText = winner === false ? 'Empate' : 'Ganó'
@@ -17,8 +17,8 @@ export function WinnerModal ({ winner, resetGame }) {
         </header>
 
         <footer>
-          <button onClick={resetGame}>
-            <RepeatIcon />
+          <button onClick={startAgain}>
+            <RestartIcon />
           </button>
         </footer>
       </div>

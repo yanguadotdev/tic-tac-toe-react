@@ -10,6 +10,9 @@ export const saveScoreToStorage = ({ score }) => {
 export const resetGameStorage = () => {
   window.localStorage.removeItem('board')
   window.localStorage.removeItem('turn')
+}
+
+export const clearScoreFromStorage = () => {
   window.localStorage.removeItem('score')
 }
 
