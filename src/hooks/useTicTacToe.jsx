@@ -42,7 +42,10 @@ export function useTicTacToe () {
     clearHistoryGame({ keys: ['history', 'move'] })
   }
 
-  const jumpTo = (nextMove) => {
+  const jumpTo = ({ to }) => {
+    console.log(to)
+    const nextMove = to === 'next' ? currentMove + 1 : currentMove - 1
+    if (nextMove < 0 || nextMove === history.length) return
     setCurrentMove(nextMove)
   }
 
@@ -94,5 +97,5 @@ export function useTicTacToe () {
     }
   }
 
-  return { board: currentSquares, updateBoard, startAgain, turn, winner, sound, toggleSound }
+  return { board: currentSquares, updateBoard, startAgain, turn, winner, sound, toggleSound, jumpTo }
 }

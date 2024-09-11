@@ -20,6 +20,10 @@
   font: inherit;
 }
 
+html {
+  scrollbar-width: thin;
+}
+
 body {
   display: flex;
   justify-content: center;
@@ -30,9 +34,13 @@ body {
   font-family: 'Rubik', sans-serif;
 }
 
+body:has(.winner) {
+  overflow: hidden;
+}
+
 #root {
   width: 100%;
-  padding-inline: 1rem;
+  padding: 1.5rem 1rem;
 }
 
 .board {
@@ -76,7 +84,6 @@ body {
 }
 
 .board button:active {
-  box-shadow: inset 0pt 4pt 10pt -2pt hsl(209, 25%, 55%), 0pt 4pt 5pt -3pt #0000;
   translate: 0 0;
   border-width: 1px;
 }
@@ -98,6 +105,11 @@ body {
     display: grid;
     place-items: center;
     font-weight: 600;
+
+    svg {
+      width: 20px;
+      height: 20px;
+    }
   }
 
   .score--o {
@@ -106,6 +118,20 @@ body {
 
   .score--x {
     color: #2785dd;
+  }
+}
+
+.history-controls {
+  display: flex;
+  justify-content: space-between;
+
+  >button {
+    background: hsl(22, 100%, 51%);
+    background: linear-gradient(hsl(22, 100%, 51%), hsl(22, 95%, 44%));
+    box-shadow: inset 0pt 4pt 10pt -2pt hsl(28, 100%, 55%), 0pt 4pt 5pt -3pt #0009;
+    border-bottom-color: hsl(22, 100%, 34%);
+    outline-color: hsl(22, 100%, 82%);
+    transform: scale(.8);
   }
 }
 
@@ -146,7 +172,7 @@ body {
 }
 
 .winner {
-  position: absolute;
+  position: fixed;
   width: 100vw;
   height: 100vh;
   top: 0;
@@ -225,11 +251,12 @@ body {
 
 @media screen and (width > 350px) {
   .square {
+
     .o-icon,
-      .x-icon {
-        width: 40px;
-        height: 40px;
-      }
+    .x-icon {
+      width: 40px;
+      height: 40px;
+    }
   }
 }
 

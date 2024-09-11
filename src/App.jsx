@@ -5,9 +5,10 @@ import { useTicTacToe } from './hooks/useTicTacToe.jsx'
 import { Score } from './components/Score.jsx'
 import { useScore } from './hooks/useScore.jsx'
 import { Footer } from './components/Footer.jsx'
+import { HistoryControls } from './components/HistoryControls.jsx'
 
 function App () {
-  const { board, updateBoard, startAgain, turn, winner, sound, toggleSound } = useTicTacToe()
+  const { board, updateBoard, startAgain, turn, winner, sound, toggleSound, jumpTo } = useTicTacToe()
   const { oWins, xWins, draws, resetScore } = useScore({ winner })
 
   const resetGame = () => {
@@ -19,6 +20,7 @@ function App () {
     <main className='board'>
       <h1>Tic Tac Toe</h1>
       <Score oWins={oWins} xWins={xWins} draws={draws} />
+      <HistoryControls jumpTo={jumpTo} />
       <Board board={board} updateBoard={updateBoard} />
       <Turn turn={turn} />
       <Footer resetGame={resetGame} sound={sound} toggleSound={toggleSound} />
