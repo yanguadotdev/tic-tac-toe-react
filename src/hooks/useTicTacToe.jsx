@@ -4,7 +4,6 @@ import confetti from 'canvas-confetti'
 import { TURNS } from '../constants.js'
 import { saveGameToStorage, resetGameStorage, getItemFromStorage } from '../storage/index.js'
 import { checkWinnerFrom, checkEndGame } from '../logic/board.js'
-// import { OIcon, XIcon } from '../components/Icons.jsx'
 
 export function useTicTacToe () {
   const [board, setBoard] = useState(() => getItemFromStorage({

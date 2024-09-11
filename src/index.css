@@ -5,7 +5,7 @@
   font-weight: 400;
 
   color-scheme: dark light;
-  
+
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -49,21 +49,33 @@ body {
 }
 
 .board button {
-  padding: 8px 12px;
-  margin: 25px;
-  background: transparent;
-  border: 2px solid #eee;
-  color: #eee;
-  width: 100px;
-  border-radius: 5px;
-  transition: 0.2s;
+  border: none;
+  color: white;
+  outline: 1px solid hsl(209, 22%, 82%);
+  outline-offset: 4px;
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 100vh;
   font-weight: bold;
   cursor: pointer;
+
+  background: linear-gradient(hsl(209, 22%, 62%), hsl(209, 17%, 55%));
+  box-shadow: inset 0pt 4pt 10pt -2pt hsl(209, 25%, 55%), 0pt 4pt 5pt -3pt #0009;
+  border-bottom: 3px solid hsl(209, 22%, 45%);
+  transition: all 0.5s ease;
 }
 
 .board button:hover {
-  background: #eee;
-  color: #222;
+  border-width: 6px;
+  translate: 0 -2px;
+}
+
+.board button:active {
+  box-shadow: inset 0pt 4pt 10pt -2pt hsl(209, 25%, 55%), 0pt 4pt 5pt -3pt #0000;
+  translate: 0 0;
+  border-width: 1px;
 }
 
 .board .game {
@@ -78,7 +90,7 @@ body {
   justify-content: center;
   margin-block: 1.5rem 2rem;
 
-  > div {
+  >div {
     flex: 1;
     height: 48px;
     display: grid;
@@ -114,9 +126,10 @@ body {
 .turn {
   border-radius: 100vh;
   border: 1px solid #59728a55;
+  margin-block: 2rem;
 }
 
-.turn > div {
+.turn>div {
   font-size: 1rem;
   width: 40px;
   height: 40px;
@@ -125,6 +138,7 @@ body {
   border-radius: 50%;
   display: grid;
   place-content: center;
+
   &.is-turn {
     color: #fff;
     background-color: #30c9e3;
@@ -178,5 +192,32 @@ body {
   place-items: center;
   cursor: pointer;
   font-size: 48px;
-  /* color: #30c9e3; */
+
+  .o-icon,
+  .x-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .o-icon {
+    color: #30c9e3;
+  }
+
+  .x-icon {
+    color: #2785dd;
+  }
+}
+
+.footer-game {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer-game .label {
+  color: #59728abb;
+  border-radius: 100vh;
+  border: 1px solid;
+  padding: .25rem .75rem;
+  font-weight: 600;
 }
