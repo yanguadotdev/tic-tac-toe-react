@@ -11,10 +11,11 @@ export function useTicTacToe () {
     fallback: Array(9).fill(null)
   }))
 
-  const [turn, setTurn] = useState(() => getItemFromStorage({
-    key: 'turn',
-    fallback: TURNS.X
-  }))
+  const [turn, setTurn] = useState(() => {
+    const value = window.localStorage.getItem('turn')
+    return value || TURNS.X
+  }
+  )
 
   const [winner, setWinner] = useState(null)
 

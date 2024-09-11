@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import { RepeatIcon } from './Icons.jsx'
 import { Square } from './Square.jsx'
 
 export function WinnerModal ({ winner, resetGame }) {
@@ -16,7 +17,9 @@ export function WinnerModal ({ winner, resetGame }) {
         </header>
 
         <footer>
-          <button onClick={resetGame}>Empezar de nuevo</button>
+          <button onClick={resetGame}>
+            <RepeatIcon />
+          </button>
         </footer>
       </div>
     </section>
