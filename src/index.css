@@ -13,18 +13,6 @@
   -webkit-text-size-adjust: 100%;
 }
 
-body {
-  margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-  background-color: #FEFEFE;
-  color: #59728a;
-  font-family: 'Rubik', sans-serif;
-}
-
 * {
   padding: 0;
   margin: 0;
@@ -32,8 +20,23 @@ body {
   font: inherit;
 }
 
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #FEFEFE;
+  color: #59728a;
+  font-family: 'Rubik', sans-serif;
+}
+
+#root {
+  width: 100%;
+  padding-inline: 1rem;
+}
+
 .board {
-  width: fit-content;
+  width: min(100%, 350px);
   margin: auto;
   text-align: center;
   border: 1px solid #36bbd3;
@@ -81,7 +84,6 @@ body {
 .board .game {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  /* gap: 10px; */
 }
 
 .game-header {
@@ -174,7 +176,7 @@ body {
   justify-content: center;
   align-items: center;
   gap: 32px;
-  
+
   h2 {
     color: hsl(209, 22%, 50%);
     font-weight: 600;
@@ -185,6 +187,7 @@ body {
 .winner .win {
   margin: 0 auto;
   width: fit-content;
+
   svg {
     width: 56px;
     height: 56px;
@@ -198,18 +201,17 @@ body {
 }
 
 .square {
-  width: 100px;
-  height: 100px;
+  width: 100%;
+  aspect-ratio: 1;
   border: 2px solid hsl(209, 22%, 85%);
   display: grid;
   place-items: center;
   cursor: pointer;
-  font-size: 48px;
 
   .o-icon,
   .x-icon {
-    width: 40px;
-    height: 40px;
+    width: 32px;
+    height: 32px;
   }
 
   .o-icon {
@@ -221,12 +223,24 @@ body {
   }
 }
 
+@media screen and (width > 350px) {
+  .square {
+    .o-icon,
+      .x-icon {
+        width: 40px;
+        height: 40px;
+      }
+  }
+}
+
 .game .square:nth-child(n+7) {
   border-bottom: none;
 }
-.game .square:nth-last-child(n+7){
+
+.game .square:nth-last-child(n+7) {
   border-top: none;
 }
+
 .game .square:nth-child(3n) {
   border-right: none;
 }
@@ -241,6 +255,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem 2rem;
 }
 
 .footer-game .label {
@@ -249,4 +265,17 @@ body {
   border: 1px solid;
   padding: .25rem .75rem;
   font-weight: 600;
+  order: -1;
+  width: 100%;
+}
+
+@media screen and (width > 375px) {
+  .footer-game {
+    flex-wrap: nowrap;
+  }
+
+  .footer-game .label {
+    order: unset;
+    width: auto;
+  }
 }
