@@ -81,7 +81,7 @@ body {
 .board .game {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
+  /* gap: 10px; */
 }
 
 .game-header {
@@ -114,13 +114,6 @@ body {
   width: fit-content;
   position: relative;
   border-radius: 10px;
-}
-
-.winner .square {
-  width: 70px;
-  height: 70px;
-  pointer-events: none;
-  border-color: transparent;
 }
 
 .turn {
@@ -159,35 +152,55 @@ body {
   display: grid;
   place-items: center;
   background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(2px);
+
+  button {
+    width: auto;
+    display: flex;
+    height: auto;
+    padding: .5rem .75rem;
+    gap: .5rem;
+  }
 }
 
 .winner .text {
-  background: #111;
+  background: hsl(209, 22%, 85%);
   height: 300px;
-  width: 320px;
-  border: 2px solid #eee;
+  width: min(100%, 300px);
+  border: 2px solid hsl(209, 22%, 55%);
   border-radius: 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 20px;
+  gap: 32px;
+  
+  h2 {
+    color: hsl(209, 22%, 50%);
+    font-weight: 600;
+    font-size: 2.5rem;
+  }
 }
 
 .winner .win {
   margin: 0 auto;
   width: fit-content;
-  border: 2px solid #eee;
-  border-radius: 10px;
-  display: flex;
-  gap: 15px;
+  svg {
+    width: 56px;
+    height: 56px;
+  }
+
+  .square {
+    width: auto;
+    height: auto;
+    pointer-events: none;
+  }
 }
 
 .square {
   width: 100px;
   height: 100px;
-  border: 2px solid #eee;
-  border-radius: 5px;
+  border: 2px solid hsl(209, 22%, 85%);
   display: grid;
   place-items: center;
   cursor: pointer;
@@ -206,6 +219,22 @@ body {
   .x-icon {
     color: #2785dd;
   }
+}
+
+.game .square:nth-child(n+7) {
+  border-bottom: none;
+}
+.game .square:nth-last-child(n+7){
+  border-top: none;
+}
+.game .square:nth-child(3n) {
+  border-right: none;
+}
+
+.game .square:nth-child(1),
+.game .square:nth-child(4),
+.game .square:nth-child(7) {
+  border-left: none;
 }
 
 .footer-game {
