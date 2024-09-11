@@ -7,7 +7,7 @@ import { useScore } from './hooks/useScore.jsx'
 import { Footer } from './components/Footer.jsx'
 
 function App () {
-  const { board, updateBoard, startAgain, turn, winner } = useTicTacToe()
+  const { board, updateBoard, startAgain, turn, winner, sound, toggleSound } = useTicTacToe()
   const { oWins, xWins, draws, resetScore } = useScore({ winner })
 
   const resetGame = () => {
@@ -21,7 +21,7 @@ function App () {
       <Score oWins={oWins} xWins={xWins} draws={draws} />
       <Board board={board} updateBoard={updateBoard} />
       <Turn turn={turn} />
-      <Footer resetGame={resetGame} />
+      <Footer resetGame={resetGame} sound={sound} toggleSound={toggleSound} />
 
       <WinnerModal winner={winner} startAgain={startAgain} />
     </main>

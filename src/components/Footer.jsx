@@ -1,6 +1,6 @@
-import { RepeatIcon, SettingIcon } from './Icons'
+import { AllowSoundIcon, NotAllowSoundIcon, RepeatIcon } from './Icons'
 
-export function Footer ({ resetGame }) {
+export function Footer ({ resetGame, sound, toggleSound }) {
   return (
     <footer className='footer-game'>
       <button onClick={resetGame}>
@@ -9,8 +9,8 @@ export function Footer ({ resetGame }) {
 
       <span className='label'>1 PLAYER</span>
 
-      <button>
-        <SettingIcon />
+      <button onClick={() => toggleSound(!sound)}>
+        {sound ? <AllowSoundIcon /> : <NotAllowSoundIcon />}
       </button>
     </footer>
   )

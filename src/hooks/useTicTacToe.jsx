@@ -4,6 +4,8 @@ import confetti from 'canvas-confetti'
 import { TURNS } from '../constants.js'
 import { saveGameToStorage, resetGameStorage, getItemFromStorage } from '../storage/index.js'
 import { checkWinnerFrom, checkEndGame } from '../logic/board.js'
+import audioPop from '../assets/pop.mp3'
+import audioWinner from '../assets/winner.wav'
 
 export function useTicTacToe () {
   const [board, setBoard] = useState(() => getItemFromStorage({
@@ -18,6 +20,9 @@ export function useTicTacToe () {
   )
 
   const [winner, setWinner] = useState(null)
+
+  // Estado para controlar el audio
+  const [sound, toggleSound] = useState(false)
 
   const startAgain = () => {
     setBoard(Array(9).fill(null))
@@ -45,15 +50,30 @@ export function useTicTacToe () {
       turn: newTurn
     })
 
-    // verificamos si hay ganador
     const newWinner = checkWinnerFrom(newBoard)
+
+    const audio = new window.Audio(audioPop)
+    audio.oncanplaythrough = () => {
+      sound && !newWinner && audio.play()
+    }
+
+    const playSound = () => {
+      const audio = new window.Audio(audioWinner)
+      audio.oncanplaythrough = () => {
+        sound && audio.play()
+      }
+    }
+
+    // verificamos si hay ganador
     if (newWinner) {
+      playSound()
       confetti()
       setWinner(newWinner)
     } else if (checkEndGame(newBoard)) {
+      playSound()
       setWinner(false)
     }
   }
 
-  return { board, updateBoard, startAgain, turn, winner }
+  return { board, updateBoard, startAgain, turn, winner, sound, toggleSound }
 }

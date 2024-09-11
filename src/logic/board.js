@@ -7,7 +7,7 @@ export const checkWinnerFrom = (boardToCheck) => {
       return boardToCheck[a]
     }
   }
-  return null
+  return false
 }
 
 export const checkEndGame = (boardToCheck) => {
