@@ -1,6 +1,7 @@
-export const saveGameToStorage = ({ board, turn }) => {
-  window.localStorage.setItem('board', JSON.stringify(board))
-  window.localStorage.setItem('turn', turn)
+export const saveGameToStorage = ({ data }) => {
+  Object.keys(data).forEach(key => {
+    window.localStorage.setItem(key, JSON.stringify(data[key]))
+  })
 }
 
 export const saveScoreToStorage = ({ score }) => {
@@ -10,6 +11,12 @@ export const saveScoreToStorage = ({ score }) => {
 export const resetGameStorage = () => {
   window.localStorage.removeItem('board')
   window.localStorage.removeItem('turn')
+}
+
+export const clearHistoryGame = ({ keys }) => {
+  keys.forEach(key => {
+    window.localStorage.removeItem(key)
+  })
 }
 
 export const clearScoreFromStorage = () => {

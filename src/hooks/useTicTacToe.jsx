@@ -2,7 +2,7 @@ import { useState } from 'react'
 import confetti from 'canvas-confetti'
 
 import { TURNS } from '../constants.js'
-import { saveGameToStorage, resetGameStorage, getItemFromStorage } from '../storage/index.js'
+import { saveGameToStorage, resetGameStorage, getItemFromStorage, clearHistoryGame } from '../storage/index.js'
 import { checkWinnerFrom, checkEndGame } from '../logic/board.js'
 import audioPop from '../assets/pop.mp3'
 import audioWinner from '../assets/winner.wav'
@@ -13,11 +13,17 @@ export function useTicTacToe () {
     fallback: Array(9).fill(null)
   }))
 
-  const [turn, setTurn] = useState(() => {
-    const value = window.localStorage.getItem('turn')
-    return value || TURNS.X
-  }
-  )
+  const [history, setHistory] = useState(() => getItemFromStorage({
+    key: 'history',
+    fallback: [Array(9).fill(null)]
+  }))
+  const [currentMove, setCurrentMove] = useState(() => {
+    const value = window.localStorage.getItem('move')
+    return value || 0
+  })
+  const xIsNext = currentMove % 2 === 0
+  const turn = xIsNext ? TURNS.X : TURNS.O
+  const currentSquares = history[currentMove]
 
   const [winner, setWinner] = useState(null)
 
@@ -26,28 +32,41 @@ export function useTicTacToe () {
 
   const startAgain = () => {
     setBoard(Array(9).fill(null))
+    setHistory([Array(9).fill(null)])
 
-    setTurn(TURNS.X)
+    setCurrentMove(0)
     setWinner(null)
 
     // Limpiamos storage
     resetGameStorage()
+    clearHistoryGame({ keys: ['history', 'move'] })
+  }
+
+  const jumpTo = (nextMove) => {
+    setCurrentMove(nextMove)
   }
 
   const updateBoard = (index) => {
     if (board[index] || winner) return
 
     const newBoard = [...board]
+
+    // Guardar historial
+    const nextHistory = [...history.slice(0, currentMove + 1), newBoard]
+    setHistory(nextHistory)
+    const nextMove = nextHistory.length - 1
+    setCurrentMove(nextMove)
+
     newBoard[index] = turn
     setBoard(newBoard)
 
-    const newTurn = turn === TURNS.X ? TURNS.O : TURNS.X
-    setTurn(newTurn)
-
     // Guardamos partida
     saveGameToStorage({
-      board: newBoard,
-      turn: newTurn
+      data: {
+        board: newBoard,
+        move: nextMove,
+        history: nextHistory
+      }
     })
 
     const newWinner = checkWinnerFrom(newBoard)
@@ -75,5 +94,5 @@ export function useTicTacToe () {
     }
   }
 
-  return { board, updateBoard, startAgain, turn, winner, sound, toggleSound }
+  return { board: currentSquares, updateBoard, startAgain, turn, winner, sound, toggleSound }
 }
