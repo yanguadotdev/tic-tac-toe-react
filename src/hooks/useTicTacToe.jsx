@@ -8,32 +8,38 @@ import audioPop from '../assets/pop.mp3'
 import audioWinner from '../assets/winner.wav'
 
 export function useTicTacToe () {
-  const [history, setHistory] = useState(() => getItemFromStorage({
-    key: 'history',
-    fallback: [Array(9).fill(null)]
-  }))
+  const [history, setHistory] = useState(() =>
+    getItemFromStorage({
+      key: 'history',
+      fallback: [Array(9).fill(null)]
+    })
+  )
   const [currentMove, setCurrentMove] = useState(() => {
     const value = window.localStorage.getItem('move')
-    return value || 0
+    return value ? Number(value) : 0
   })
+
   const xIsNext = currentMove % 2 === 0
   const turn = xIsNext ? TURNS.X : TURNS.O
-  const currentSquares = history[currentMove]
-
+  const currentBoard = history[currentMove]
   const [winner, setWinner] = useState(null)
-
-  // Estado para controlar el audio
-  const [sound, toggleSound] = useState(false)
+  const [sound, toggleSound] = useState(false) // Para controlar el audio
 
   const startAgain = () => {
     setHistory([Array(9).fill(null)])
-
     setCurrentMove(0)
     setWinner(null)
-
-    // Limpiamos storage
+    // Limpiar storage
     resetGameStorage()
     clearHistoryGame({ keys: ['history', 'move'] })
+  }
+
+  // Función para reproducir audio
+  const playAudio = (src) => {
+    const audio = new window.Audio(src)
+    audio.oncanplaythrough = () => {
+      sound && audio.play()
+    }
   }
 
   const jumpTo = ({ to }) => {
@@ -43,17 +49,16 @@ export function useTicTacToe () {
   }
 
   const updateBoard = (index) => {
-    if (currentSquares[index] || winner) return
+    if (currentBoard[index] || winner) return
 
-    const newBoard = [...currentSquares]
+    const newBoard = [...currentBoard]
+    newBoard[index] = turn
 
     // Guardar historial
     const nextHistory = [...history.slice(0, currentMove + 1), newBoard]
     setHistory(nextHistory)
     const nextMove = nextHistory.length - 1
     setCurrentMove(nextMove)
-
-    newBoard[index] = turn
 
     // Guardamos partida
     saveGameToStorage({
@@ -65,28 +70,18 @@ export function useTicTacToe () {
 
     const newWinner = checkWinnerFrom(newBoard)
 
-    const audio = new window.Audio(audioPop)
-    audio.oncanplaythrough = () => {
-      sound && !newWinner && audio.play()
-    }
-
-    const playSound = () => {
-      const audio = new window.Audio(audioWinner)
-      audio.oncanplaythrough = () => {
-        sound && audio.play()
-      }
-    }
+    !newWinner && playAudio(audioPop)
 
     // verificamos si hay ganador
     if (newWinner) {
-      playSound()
+      playAudio(audioWinner)
       confetti()
       setWinner(newWinner)
     } else if (checkEndGame(newBoard)) {
-      playSound()
+      playAudio(audioWinner)
       setWinner(false)
     }
   }
 
-  return { board: currentSquares, updateBoard, startAgain, turn, winner, sound, toggleSound, jumpTo }
+  return { board: currentBoard, updateBoard, startAgain, turn, winner, sound, toggleSound, jumpTo }
 }
