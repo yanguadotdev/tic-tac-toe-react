@@ -8,11 +8,6 @@ import audioPop from '../assets/pop.mp3'
 import audioWinner from '../assets/winner.wav'
 
 export function useTicTacToe () {
-  const [board, setBoard] = useState(() => getItemFromStorage({
-    key: 'board',
-    fallback: Array(9).fill(null)
-  }))
-
   const [history, setHistory] = useState(() => getItemFromStorage({
     key: 'history',
     fallback: [Array(9).fill(null)]
@@ -31,7 +26,6 @@ export function useTicTacToe () {
   const [sound, toggleSound] = useState(false)
 
   const startAgain = () => {
-    setBoard(Array(9).fill(null))
     setHistory([Array(9).fill(null)])
 
     setCurrentMove(0)
@@ -43,16 +37,15 @@ export function useTicTacToe () {
   }
 
   const jumpTo = ({ to }) => {
-    console.log(to)
     const nextMove = to === 'next' ? currentMove + 1 : currentMove - 1
     if (nextMove < 0 || nextMove === history.length) return
     setCurrentMove(nextMove)
   }
 
   const updateBoard = (index) => {
-    if (board[index] || winner) return
+    if (currentSquares[index] || winner) return
 
-    const newBoard = [...board]
+    const newBoard = [...currentSquares]
 
     // Guardar historial
     const nextHistory = [...history.slice(0, currentMove + 1), newBoard]
@@ -61,12 +54,10 @@ export function useTicTacToe () {
     setCurrentMove(nextMove)
 
     newBoard[index] = turn
-    setBoard(newBoard)
 
     // Guardamos partida
     saveGameToStorage({
       data: {
-        board: newBoard,
         move: nextMove,
         history: nextHistory
       }
