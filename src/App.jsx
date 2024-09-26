@@ -17,21 +17,31 @@ function App () {
     currentMove,
     history
   } = useTicTacToe()
-  const { oWins, xWins, draws, resetScore } = useScore({ winner })
+  const { oWins, xWins, draws } = useScore({ winner })
 
   const resetGame = () => {
     startAgain()
-    resetScore()
   }
 
   return (
     <main className='board'>
       <h1>Tic Tac Toe</h1>
       <Score oWins={oWins} xWins={xWins} draws={draws} />
-      <HistoryControls history={history} currentMove={currentMove} jumpTo={jumpTo} />
-      <Board board={board} updateBoard={updateBoard} />
+      <HistoryControls
+        history={history}
+        currentMove={currentMove}
+        jumpTo={jumpTo}
+      />
+      <Board
+        board={board}
+        updateBoard={updateBoard}
+      />
       <Turn turn={turn} />
-      <Footer resetGame={resetGame} sound={sound} toggleSound={updateSound} />
+      <Footer
+        resetGame={resetGame}
+        sound={sound}
+        toggleSound={updateSound}
+      />
 
       <WinnerModal winner={winner} startAgain={startAgain} />
     </main>
