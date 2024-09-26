@@ -93,6 +93,15 @@ body:has(.winner) {
     translate: 0 0;
     border-width: 1px;
   }
+
+  &[disabled] {
+    --hue: 209!important;
+    --saturation: 20%;
+    opacity: .7;
+    border-width: 0;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
 }
 
 .board .game {

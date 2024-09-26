@@ -1,13 +1,21 @@
 import { UndoLeftIcon, UndoRightIcon } from './Icons'
 
-export function HistoryControls ({ jumpTo }) {
+export function HistoryControls ({ jumpTo, currentMove, history }) {
   return (
     <section className='history-controls'>
-      <button className='Button3D' onClick={() => jumpTo({ to: 'back' })}>
+      <button
+        className='Button3D'
+        onClick={() => jumpTo({ to: 'back' })}
+        disabled={currentMove === 0}
+      >
         <UndoLeftIcon />
       </button>
 
-      <button className='Button3D' onClick={() => jumpTo({ to: 'next' })}>
+      <button
+        className='Button3D'
+        onClick={() => jumpTo({ to: 'next' })}
+        disabled={currentMove === history.length - 1}
+      >
         <UndoRightIcon />
       </button>
     </section>

@@ -84,5 +84,16 @@ export function useTicTacToe () {
     }
   }
 
-  return { board: currentBoard, updateBoard, startAgain, turn, winner, sound, updateSound, jumpTo }
+  return {
+    board: currentBoard,
+    updateBoard,
+    startAgain,
+    turn,
+    winner,
+    sound,
+    updateSound,
+    jumpTo,
+    currentMove,
+    history
+  }
 }
