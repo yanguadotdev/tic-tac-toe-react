@@ -7,10 +7,18 @@ export function useSound () {
     fallback: false
   }))
 
+  // Function to sounds reproductor
+  const playSound = (src) => {
+    const audio = new window.Audio(src)
+    audio.oncanplaythrough = () => {
+      sound && audio.play()
+    }
+  }
+
   const updateSound = () => {
     saveInStorage({ data: { sound: !sound } })
     toggleSound(!sound)
   }
 
-  return { sound, updateSound }
+  return { sound, updateSound, playSound }
 }

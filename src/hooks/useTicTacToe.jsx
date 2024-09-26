@@ -1,30 +1,25 @@
 import { useState } from 'react'
 import confetti from 'canvas-confetti'
 
-import { TURNS } from '../constants.js'
-import { saveInStorage, resetGameStorage, getItemFromStorage, clearHistoryGame } from '../storage/index.js'
+import { saveInStorage, resetGameStorage, clearHistoryGame } from '../storage/index.js'
 import { checkWinnerFrom, checkEndGame } from '../logic/board.js'
 import audioPop from '../assets/pop.mp3'
 import audioWinner from '../assets/winner.wav'
 import { useSound } from './useSound.jsx'
+import { useHistory } from './useHistory.jsx'
+import { getGameState } from '../utils.js'
 
 export function useTicTacToe () {
-  const [history, setHistory] = useState(() =>
-    getItemFromStorage({
-      key: 'history',
-      fallback: [Array(9).fill(null)]
-    })
-  )
-  const [currentMove, setCurrentMove] = useState(() => {
-    const value = window.localStorage.getItem('move')
-    return value ? Number(value) : 0
-  })
+  const {
+    history,
+    setHistory,
+    currentMove,
+    setCurrentMove
+  } = useHistory()
 
-  const xIsNext = currentMove % 2 === 0
-  const turn = xIsNext ? TURNS.X : TURNS.O
-  const currentBoard = history[currentMove]
+  const { turn, currentBoard } = getGameState(currentMove, history)
   const [winner, setWinner] = useState(null)
-  const { sound, updateSound } = useSound()
+  const { sound, updateSound, playSound } = useSound()
 
   const startAgain = () => {
     setHistory([Array(9).fill(null)])
@@ -33,14 +28,6 @@ export function useTicTacToe () {
     // Limpiar storage
     resetGameStorage()
     clearHistoryGame({ keys: ['history', 'move'] })
-  }
-
-  // Función para reproducir audio
-  const playAudio = (src) => {
-    const audio = new window.Audio(src)
-    audio.oncanplaythrough = () => {
-      sound && audio.play()
-    }
   }
 
   const jumpTo = ({ to }) => {
@@ -71,15 +58,15 @@ export function useTicTacToe () {
 
     const newWinner = checkWinnerFrom(newBoard)
 
-    !newWinner && playAudio(audioPop)
+    !newWinner && playSound(audioPop)
 
     // verificamos si hay ganador
     if (newWinner) {
-      playAudio(audioWinner)
+      playSound(audioWinner)
       confetti()
       setWinner(newWinner)
     } else if (checkEndGame(newBoard)) {
-      playAudio(audioWinner)
+      playSound(audioWinner)
       setWinner(false)
     }
   }

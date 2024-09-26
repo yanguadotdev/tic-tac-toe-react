@@ -1,29 +1,34 @@
 :root {
-  font-family             : system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  font-size               : 16px;
-  line-height             : 24px;
-  font-weight             : 400;
-  color-scheme            : dark light;
-  font-synthesis          : none;
-  text-rendering          : optimizeLegibility;
-  -webkit-font-smoothing  : antialiased;
-  -moz-osx-font-smoothing : grayscale;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+  color-scheme: dark light;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 
-  --hue                : 144;
-  --saturation         : 100%;
-  --lightness-primary  : 51%;   /* Color principal */
-  --lightness-secondary: 44%;   /* Color secundario para degradado */
-  --lightness-shadow   : 55%;   /* Color para sombra interna */
-  --lightness-border   : 34%;   /* Color del borde inferior */
-  --lightness-outline  : 82%;   /* Color del outline */
+  --hue: 144;
+  --saturation: 100%;
+  --lightness-primary: 51%;
+  /* Color principal */
+  --lightness-secondary: 44%;
+  /* Color secundario para degradado */
+  --lightness-shadow: 55%;
+  /* Color para sombra interna */
+  --lightness-border: 34%;
+  /* Color del borde inferior */
+  --lightness-outline: 82%;
+  /* Color del outline */
 }
 
 * {
-  padding   : 0;
-  margin    : 0;
+  padding: 0;
+  margin: 0;
   box-sizing: border-box;
-  font      : inherit;
+  font: inherit;
 }
 
 html {
@@ -31,13 +36,13 @@ html {
 }
 
 body {
-  display         : flex;
-  justify-content : center;
-  align-items     : center;
-  min-height      : 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
   background-color: #FEFEFE;
-  color           : #59728a;
-  font-family     : 'Rubik', sans-serif;
+  color: #59728a;
+  font-family: 'Rubik', sans-serif;
 }
 
 body:has(.winner) {
@@ -45,44 +50,44 @@ body:has(.winner) {
 }
 
 #root {
-  width  : 100%;
+  width: 100%;
   padding: 1.5rem 1rem;
 }
 
 .board {
-  width        : min(100%, 350px);
-  margin       : auto;
-  text-align   : center;
-  border       : 1px solid #36bbd3;
-  padding      : 1.5rem;
+  width: min(100%, 350px);
+  margin: auto;
+  text-align: center;
+  border: 1px solid #36bbd3;
+  padding: 1.5rem;
   border-radius: .25rem;
-  box-shadow   : 0 0 32px 8px #36bbd311;
+  box-shadow: 0 0 32px 8px #36bbd311;
 }
 
 .board h1 {
   margin-bottom: 16px;
-  font-weight  : 800;
-  font-size    : 2rem;
+  font-weight: 800;
+  font-size: 2rem;
 }
 
 .Button3D {
-  border        : none;
-  color         : white;
+  border: none;
+  color: white;
   outline-offset: 4px;
-  display       : grid;
-  place-items   : center;
-  width         : 64px;
-  height        : 64px;
-  border-radius : 100vh;
-  font-weight   : bold;
-  cursor        : pointer;
-  background    : linear-gradient(hsl(var(--hue), var(--saturation), var(--lightness-primary)), hsl(var(--hue), calc(var(--saturation) - 5%), var(--lightness-secondary)));
-  box-shadow    : inset 0pt 4pt 10pt -2pt hsl(var(--hue), var(--saturation), var(--lightness-shadow)), 0pt 4pt 5pt -3pt #0009;
-  border-bottom : 3px solid hsl(var(--hue), var(--saturation), var(--lightness-border));
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 100vh;
+  font-weight: bold;
+  cursor: pointer;
+  background: linear-gradient(hsl(var(--hue), var(--saturation), var(--lightness-primary)), hsl(var(--hue), calc(var(--saturation) - 5%), var(--lightness-secondary)));
+  box-shadow: inset 0pt 4pt 10pt -2pt hsl(var(--hue), var(--saturation), var(--lightness-shadow)), 0pt 4pt 5pt -3pt #0009;
+  border-bottom: 3px solid hsl(var(--hue), var(--saturation), var(--lightness-border));
 
-  outline      : 1px solid;
+  outline: 1px solid;
   outline-color: hsl(var(--hue), var(--saturation), var(--lightness-outline));
-  transition   : all .3s ease;
+  transition: all .3s ease;
 
   &:hover {
     border-width: 6px;
@@ -95,7 +100,7 @@ body:has(.winner) {
   }
 
   &[disabled] {
-    --hue: 209!important;
+    --hue: 209 !important;
     --saturation: 20%;
     opacity: .7;
     border-width: 0;
@@ -107,18 +112,33 @@ body:has(.winner) {
 .board .game {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+
+  .square:hover {
+    background-color: #f2f2f277;
+  }
+
+  svg {
+    transform: scale(1.2);
+    animation: in .3s linear forwards;
+  }
+}
+
+@keyframes in {
+  to {
+    transform: scale(1);
+  }
 }
 
 .game-header {
-  display        : flex;
-  align-items    : center;
+  display: flex;
+  align-items: center;
   justify-content: center;
-  margin-block   : 1.5rem 2rem;
+  margin-block: 1.5rem 2rem;
 
   >div {
-    flex       : 1;
-    height     : 48px;
-    display    : grid;
+    flex: 1;
+    height: 48px;
+    display: grid;
     place-items: center;
     font-weight: 600;
 
@@ -138,116 +158,117 @@ body:has(.winner) {
 }
 
 .history-controls {
-  display        : flex;
+  display: flex;
   justify-content: space-between;
 
-  .Button3D {    
+  .Button3D {
     --hue: 22;
   }
 }
 
 .turn {
-  display        : flex;
+  display: flex;
   justify-content: center;
-  margin         : 15px auto;
-  width          : fit-content;
-  position       : relative;
-  border-radius  : 10px;
+  margin: 15px auto;
+  width: fit-content;
+  position: relative;
+  border-radius: 10px;
 }
 
 .turn {
   border-radius: 100vh;
-  border       : 1px solid #59728a55;
-  margin-block : 2rem;
+  border: 1px solid #59728a55;
+  margin-block: 2rem;
 }
 
 .turn>div {
-  font-size    : 1rem;
-  width        : 40px;
-  height       : 40px;
-  border       : 0;
-  cursor       : default;
+  font-size: 1rem;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  cursor: default;
   border-radius: 50%;
-  display      : grid;
+  display: grid;
   place-content: center;
 
   &.is-turn {
-    color           : #fff;
+    color: #fff;
     background-color: #30c9e3;
   }
 }
 
 .square.is-selected {
-  color     : #fff;
+  color: #fff;
   background: #09f;
 }
 
+
 .winner {
-  position        : fixed;
-  width           : 100vw;
-  height          : 100vh;
-  top             : 0;
-  left            : 0;
-  display         : grid;
-  place-items     : center;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  display: grid;
+  place-items: center;
   background-color: rgba(0, 0, 0, 0.7);
-  backdrop-filter : blur(2px);
+  backdrop-filter: blur(2px);
 
   button {
-    width  : auto;
+    width: auto;
     display: flex;
-    height : auto;
+    height: auto;
     padding: .5rem .75rem;
-    gap    : .5rem;
+    gap: .5rem;
   }
 }
 
 .winner .text {
-  background     : hsl(209, 22%, 85%);
-  height         : 300px;
-  width          : min(100%, 300px);
-  border         : 2px solid hsl(209, 22%, 55%);
-  border-radius  : 10px;
-  display        : flex;
-  flex-direction : column;
+  background: hsl(209, 22%, 85%);
+  height: 300px;
+  width: min(100%, 300px);
+  border: 2px solid hsl(209, 22%, 55%);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
-  align-items    : center;
-  gap            : 32px;
+  align-items: center;
+  gap: 32px;
 
   h2 {
-    color      : hsl(209, 22%, 50%);
+    color: hsl(209, 22%, 50%);
     font-weight: 600;
-    font-size  : 2.5rem;
+    font-size: 2.5rem;
   }
 }
 
 .winner .win {
   margin: 0 auto;
-  width : fit-content;
+  width: fit-content;
 
   svg {
-    width : 56px;
+    width: 56px;
     height: 56px;
   }
 
   .square {
-    width         : auto;
-    height        : auto;
+    width: auto;
+    height: auto;
     pointer-events: none;
   }
 }
 
 .square {
-  width       : 100%;
+  width: 100%;
   aspect-ratio: 1;
-  border      : 2px solid hsl(209, 22%, 85%);
-  display     : grid;
-  place-items : center;
-  cursor      : pointer;
+  border: 2px solid hsl(209, 22%, 85%);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
 
   .o-icon,
   .x-icon {
-    width : 32px;
+    width: 32px;
     height: 32px;
   }
 
@@ -290,21 +311,21 @@ body:has(.winner) {
 }
 
 .footer-game {
-  display        : flex;
-  align-items    : center;
+  display: flex;
+  align-items: center;
   justify-content: space-between;
-  flex-wrap      : wrap;
-  gap            : 1rem 2rem;
+  flex-wrap: wrap;
+  gap: 1rem 2rem;
 }
 
 .footer-game .label {
-  color        : #59728abb;
+  color: #59728abb;
   border-radius: 100vh;
-  border       : 1px solid;
-  padding      : .25rem .75rem;
-  font-weight  : 600;
-  order        : -1;
-  width        : 100%;
+  border: 1px solid;
+  padding: .25rem .75rem;
+  font-weight: 600;
+  order: -1;
+  width: 100%;
 }
 
 @media screen and (width > 375px) {
