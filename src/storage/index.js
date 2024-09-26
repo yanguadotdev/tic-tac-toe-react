@@ -1,4 +1,4 @@
-export const saveGameToStorage = ({ data }) => {
+export const saveInStorage = ({ data }) => {
   Object.keys(data).forEach(key => {
     window.localStorage.setItem(key, JSON.stringify(data[key]))
   })

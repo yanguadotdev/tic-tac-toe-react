@@ -8,7 +8,7 @@ import { Footer } from './components/Footer.jsx'
 import { HistoryControls } from './components/HistoryControls.jsx'
 
 function App () {
-  const { board, updateBoard, startAgain, turn, winner, sound, toggleSound, jumpTo } = useTicTacToe()
+  const { board, updateBoard, startAgain, turn, winner, sound, updateSound, jumpTo } = useTicTacToe()
   const { oWins, xWins, draws, resetScore } = useScore({ winner })
 
   const resetGame = () => {
@@ -23,7 +23,7 @@ function App () {
       <HistoryControls jumpTo={jumpTo} />
       <Board board={board} updateBoard={updateBoard} />
       <Turn turn={turn} />
-      <Footer resetGame={resetGame} sound={sound} toggleSound={toggleSound} />
+      <Footer resetGame={resetGame} sound={sound} toggleSound={updateSound} />
 
       <WinnerModal winner={winner} startAgain={startAgain} />
     </main>

@@ -2,10 +2,11 @@ import { useState } from 'react'
 import confetti from 'canvas-confetti'
 
 import { TURNS } from '../constants.js'
-import { saveGameToStorage, resetGameStorage, getItemFromStorage, clearHistoryGame } from '../storage/index.js'
+import { saveInStorage, resetGameStorage, getItemFromStorage, clearHistoryGame } from '../storage/index.js'
 import { checkWinnerFrom, checkEndGame } from '../logic/board.js'
 import audioPop from '../assets/pop.mp3'
 import audioWinner from '../assets/winner.wav'
+import { useSound } from './useSound.jsx'
 
 export function useTicTacToe () {
   const [history, setHistory] = useState(() =>
@@ -23,7 +24,7 @@ export function useTicTacToe () {
   const turn = xIsNext ? TURNS.X : TURNS.O
   const currentBoard = history[currentMove]
   const [winner, setWinner] = useState(null)
-  const [sound, toggleSound] = useState(false) // Para controlar el audio
+  const { sound, updateSound } = useSound()
 
   const startAgain = () => {
     setHistory([Array(9).fill(null)])
@@ -61,7 +62,7 @@ export function useTicTacToe () {
     setCurrentMove(nextMove)
 
     // Guardamos partida
-    saveGameToStorage({
+    saveInStorage({
       data: {
         move: nextMove,
         history: nextHistory
@@ -83,5 +84,5 @@ export function useTicTacToe () {
     }
   }
 
-  return { board: currentBoard, updateBoard, startAgain, turn, winner, sound, toggleSound, jumpTo }
+  return { board: currentBoard, updateBoard, startAgain, turn, winner, sound, updateSound, jumpTo }
 }

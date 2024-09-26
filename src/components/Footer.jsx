@@ -9,9 +9,13 @@ export function Footer ({ resetGame, sound, toggleSound }) {
 
       <span className='label'>1 PLAYER</span>
 
-      <button className='Button3D' onClick={() => toggleSound(!sound)}>
+      <button
+        className='Button3D'
+        onClick={toggleSound}
+      >
         {sound ? <AllowSoundIcon /> : <NotAllowSoundIcon />}
       </button>
+
     </footer>
   )
 }

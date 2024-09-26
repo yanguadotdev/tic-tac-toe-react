@@ -24,7 +24,7 @@ export function WinnerModal ({ winner, startAgain }) {
         </header>
 
         <footer>
-          <button onClick={startAgain}>
+          <button className='Button3D' onClick={startAgain}>
             <RestartIcon /> Start again
           </button>
         </footer>
