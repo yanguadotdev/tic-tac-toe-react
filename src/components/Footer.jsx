@@ -7,7 +7,7 @@ export function Footer ({ resetGame, sound, toggleSound }) {
         <RepeatIcon />
       </button>
 
-      <span className='label'>1 PLAYER</span>
+      <span className='label'>Multiplayer</span>
 
       <button
         className='Button3D'
