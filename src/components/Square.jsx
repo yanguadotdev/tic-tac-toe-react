@@ -7,7 +7,11 @@ export const Square = ({ children, updateBoard, index, isSelected }) => {
   }
 
   return (
-    <div onClick={handleClick} className={className}>
+    <div
+      onClick={handleClick}
+      className={className}
+      data-testid={`square-${index}`}
+    >
       {children}
     </div>
   )
