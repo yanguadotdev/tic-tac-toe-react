@@ -7,7 +7,7 @@ describe('Tic Tac Toe App Flow', () => {
     cleanup()
   })
 
-  it('should allow making moves, undoing and redoing moves, and declaring a winner', () => {
+  it('should simulate a full gameplay flow, including making moves, using undo/redo functionality, and ensuring the correct state updates', () => {
     const { getByTestId } = render(<App />)
 
     const undoButton = screen.getByRole('button', { name: /undo/i })
@@ -25,14 +25,14 @@ describe('Tic Tac Toe App Flow', () => {
     let iconSquare0 = getByTestId('square-0').querySelector('svg')
     expect(iconSquare0).toBeNull()
 
-    fireEvent.click(getByTestId('square-0'))
+    fireEvent.click(getByTestId('square-0')) // X
 
     checkButtonsState(false, true)
 
     iconSquare0 = getByTestId('square-0').querySelector('svg')
     expect(iconSquare0.className).toBe('x-icon')
 
-    fireEvent.click(getByTestId('square-4'))
+    fireEvent.click(getByTestId('square-4')) // O
 
     let iconSquare4 = getByTestId('square-4').querySelector('svg')
     expect(iconSquare4.className).toBe('o-icon')
@@ -58,7 +58,7 @@ describe('Tic Tac Toe App Flow', () => {
     let iconSquare8 = getByTestId('square-8').querySelector('svg')
     expect(iconSquare8).toBeNull()
 
-    fireEvent.click(getByTestId('square-8'))
+    fireEvent.click(getByTestId('square-8')) // X
 
     iconSquare8 = getByTestId('square-8').querySelector('svg')
     expect(iconSquare8.className).toBe('x-icon')
@@ -79,11 +79,45 @@ describe('Tic Tac Toe App Flow', () => {
     iconSquare4 = getByTestId('square-4').querySelector('svg')
     expect(iconSquare4).toBeNull()
 
-    fireEvent.click(getByTestId('square-8'))
+    fireEvent.click(getByTestId('square-8')) // O
 
     iconSquare8 = getByTestId('square-8').querySelector('svg')
     expect(iconSquare8.className).toBe('o-icon')
 
     checkButtonsState(false, true)
+  })
+
+  // ! For this to work you need to disable the confetti library, because canva doesn't work very well in a test environment or use Playwright and you can forget about this.
+  it('should declare a winner when a player has three in a row', () => {
+    const { getByTestId, getByRole } = render(<App />)
+
+    const undo = getByRole('button', { name: /undo/i })
+    const redo = getByRole('button', { name: /redo/i })
+    expect(undo.disabled).toBe(false)
+    expect(redo.disabled).toBe(true)
+
+    // Jugadas para que 'X' gane
+    fireEvent.click(getByTestId('square-1')) // X
+    fireEvent.click(getByTestId('square-3')) // O
+    fireEvent.click(getByTestId('square-2')) // X
+
+    const iconSquare1 = getByTestId('square-1').querySelector('svg')
+    const iconSquare3 = getByTestId('square-3').querySelector('svg')
+    expect(iconSquare1.className).toBe('x-icon')
+    expect(iconSquare3.className).toBe('o-icon')
+
+    const winnerModal = document.querySelector('.winner')
+    expect(winnerModal).toBeTruthy()
+
+    const scoreX = document.querySelector('.score--x')
+    const p = scoreX.querySelector('p')
+    expect(p.textContent).toBe('1 wins')
+
+    const restartBtn = winnerModal.querySelector('button.Button3D')
+    expect(restartBtn).toBeTruthy()
+    fireEvent.click(restartBtn)
+
+    expect(undo.disabled).toBe(true)
+    expect(redo.disabled).toBe(true)
   })
 })
