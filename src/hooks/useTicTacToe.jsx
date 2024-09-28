@@ -1,22 +1,18 @@
-import { useState } from 'react'
 import confetti from 'canvas-confetti'
 
 import { saveInStorage, resetGameStorage, clearHistoryGame } from '../storage/index.js'
 import { checkWinnerFrom, checkEndGame } from '../logic/board.js'
 import { useSound } from './useSound.jsx'
-import { useHistory } from './useHistory.jsx'
-import { getGameState } from '../utils.js'
+import { useGameState } from './useGameState.jsx'
 
 export function useTicTacToe () {
   const {
-    history,
-    setHistory,
-    currentMove,
-    setCurrentMove
-  } = useHistory()
+    history, setHistory,
+    currentMove, setCurrentMove,
+    turn, currentBoard,
+    winner, setWinner
+  } = useGameState()
 
-  const { turn, currentBoard } = getGameState(currentMove, history)
-  const [winner, setWinner] = useState(null)
   const {
     sound, updateSound, playSound,
     popSound, winnerSound, clickSound
