@@ -14,7 +14,6 @@ function App () {
     board, updateBoard,
     startAgain,
     turn, winner,
-    sound, updateSound,
     jumpTo,
     currentMove,
     history
@@ -43,8 +42,6 @@ function App () {
       <Turn turn={turn} />
       <Footer
         resetGame={resetGame}
-        sound={sound}
-        toggleSound={updateSound}
       />
 
       <WinnerModal winner={winner} startAgain={startAgain} />

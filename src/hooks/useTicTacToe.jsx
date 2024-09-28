@@ -1,9 +1,10 @@
 import confetti from 'canvas-confetti'
+import { useContext } from 'react'
 
 import { saveInStorage, resetGameStorage, clearHistoryGame } from '../storage/index.js'
 import { checkWinnerFrom, checkEndGame } from '../logic/board.js'
-import { useSound } from './useSound.jsx'
 import { useGameState } from './useGameState.jsx'
+import { SoundContext } from '../context/soundContext.jsx'
 
 export function useTicTacToe () {
   const {
@@ -14,9 +15,9 @@ export function useTicTacToe () {
   } = useGameState()
 
   const {
-    sound, updateSound, playSound,
+    playSound,
     popSound, winnerSound, clickSound
-  } = useSound()
+  } = useContext(SoundContext)
 
   const startAgain = () => {
     playSound(clickSound)
@@ -76,8 +77,6 @@ export function useTicTacToe () {
     startAgain,
     turn,
     winner,
-    sound,
-    updateSound,
     jumpTo,
     currentMove,
     history
