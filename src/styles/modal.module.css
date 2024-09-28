@@ -1,0 +1,36 @@
+@import url('./animation.css');
+
+.Modal {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  display: grid;
+  place-items: center;
+  background-color: hsla(var(--grey-800), .9);
+  backdrop-filter: blur(2px);
+}
+
+.Modal_content {
+  background: hsl(var(--grey-700));
+  height: max-content;
+  width: min(100%, 350px);
+  border: 2px solid hsl(var(--grey-800));
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  padding-block: 2rem 5rem;
+  animation: bounceIn var(--drt-normal);
+  animation-timing-function: var(--bounce-bezier);
+}
+
+.Modal_winner {
+  svg {
+    width: 56px;
+    height: 56px;
+  }
+}

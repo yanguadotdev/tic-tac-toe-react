@@ -1,0 +1,58 @@
+.Button3D {
+  outline-offset: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .25rem;
+  width: 64px;
+  height: 64px;
+  border-radius: 100vh;
+  font-weight: bold;
+  cursor: pointer;
+  background: linear-gradient(hsl(var(--hue), var(--saturation), var(--lightness-primary)), hsl(var(--hue), calc(var(--saturation) - 5%), var(--lightness-secondary)));
+  box-shadow: inset 0pt 4pt 10pt -2pt hsl(var(--hue), var(--saturation), var(--lightness-shadow)), 0pt 4pt 5pt -3pt #0009;
+  border-bottom: 3px solid hsl(var(--hue), var(--saturation), var(--lightness-border));
+  outline: 1px solid;
+  outline-color: hsl(var(--hue), var(--saturation), var(--lightness-outline));
+  transition: all .3s ease;
+
+  &:hover {
+    border-width: 6px;
+    translate: 0 -2px;
+  }
+
+  &:active {
+    translate: 0 0;
+    border-width: 1px;
+  }
+
+  &[disabled] {
+    --hue: 209 !important;
+    --saturation: 10%;
+    opacity: .7;
+    border-width: 0;
+    pointer-events: none;
+  }
+}
+
+.Button_primary {
+  --hue: 144;
+  --lightness-primary: 38%;
+  --lightness-shadow: 47%;
+  --lightness-border: 22%;
+  --lightness-outline: 55%;
+}
+
+.Button_secondary {
+  --hue: 22;
+  --lightness-primary: 38%;
+  --lightness-shadow: 47%;
+  --lightness-border: 25%;
+  --lightness-outline: 62%;
+}
+
+.Button_fitContent {
+  width: auto;
+  height: auto;
+  padding: .5rem .75rem;
+}

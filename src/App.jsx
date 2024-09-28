@@ -6,6 +6,8 @@ import { Score } from './components/Score.jsx'
 import { useScore } from './hooks/useScore.jsx'
 import { Footer } from './components/Footer.jsx'
 import { HistoryControls } from './components/HistoryControls.jsx'
+import styles from './styles/shadow.module.css'
+import utils from './styles/utilities.module.css'
 
 function App () {
   const {
@@ -24,8 +26,10 @@ function App () {
   }
 
   return (
-    <main className='board'>
-      <h1>Tic Tac Toe</h1>
+    <main
+      className={`Game board ${styles.Shadow_inset} ${utils.flex_col}`}
+    >
+      <h1 className={utils.text_lg}>Tic Tac Toe</h1>
       <Score oWins={oWins} xWins={xWins} draws={draws} />
       <HistoryControls
         history={history}

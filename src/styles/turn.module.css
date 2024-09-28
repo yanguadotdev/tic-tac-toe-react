@@ -1,0 +1,26 @@
+.Turn {
+  display: flex;
+  justify-content: center;
+  margin-inline: auto;
+  width: fit-content;
+  position: relative;
+  border-radius: 100vh;
+  margin-block: 1rem;
+  border: 1px solid hsl(var(--grey-300));
+}
+
+.Turn_turn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: grid;
+  place-content: center;
+}
+
+.Turn_turn__active {
+  background: hsl(var(--sky-600));
+
+  >svg {
+    color: hsl(var(--white));
+  }
+}

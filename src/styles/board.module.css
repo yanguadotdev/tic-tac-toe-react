@@ -1,0 +1,54 @@
+@import url('./animation.css');
+
+.Board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.Square {
+  width: 100%;
+  aspect-ratio: 1;
+  border: 2px solid hsla(var(--grey-300), .3);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+
+  >svg {
+    width: 32px;
+    height: 32px;
+    animation: bounceIn var(--drt-normal);
+    animation-timing-function: var(--bounce-bezier);
+  }
+
+  &:hover {
+    background-color: hsla(var(--grey-300), .05);
+  }
+}
+
+@media screen and (width > 350px) {
+  .Square {
+
+    >svg {
+      width: 40px;
+      height: 40px;
+    }
+  }
+}
+
+.Square:nth-child(n+7) {
+  border-bottom: none;
+}
+
+.Square:nth-last-child(n+7) {
+  border-top: none;
+}
+
+.Square:nth-child(3n) {
+  border-right: none;
+}
+
+.Square:nth-child(1),
+.Square:nth-child(4),
+.Square:nth-child(7) {
+  border-left: none;
+}

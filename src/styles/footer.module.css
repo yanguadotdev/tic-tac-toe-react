@@ -1,0 +1,28 @@
+.FooterGame {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem 2rem;
+}
+
+.Label {
+  color: hsl(var(--grey-300));
+  border-radius: 100vh;
+  border: 1px solid;
+  padding: .5rem .75rem;
+  font-weight: 600;
+  order: -1;
+  width: 100%;
+}
+
+@media screen and (width > 375px) {
+  .FooterGame {
+    flex-wrap: nowrap;
+  }
+
+  .Label {
+    order: unset;
+    width: auto;
+  }
+}

@@ -1,0 +1,27 @@
+.ScoreLayout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: .5rem;
+}
+
+.Score {
+  flex: 1;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  font-weight: 600;
+
+  >svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.Score_x {
+  color: var(--x-token);
+}
+
+.Score_o {
+  color: var(--o-token);
+}

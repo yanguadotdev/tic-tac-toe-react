@@ -1,7 +1,8 @@
 /* eslint-disable react/prop-types */
+import styles from '../styles/board.module.css'
 
-export const Square = ({ children, updateBoard, index, isSelected }) => {
-  const className = `square ${isSelected ? 'is-selected' : ''}`
+export const Square = ({ children, updateBoard, index }) => {
+  const className = `${styles.Square}`
   const handleClick = () => {
     updateBoard(index)
   }

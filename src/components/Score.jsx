@@ -1,19 +1,24 @@
 import { DrawIcon, OIcon, XIcon } from './Icons'
+import styles from '../styles/score.module.css'
 
 /* eslint-disable react/prop-types */
 export function Score ({ oWins, xWins, draws }) {
   return (
     <>
-      <header className='game-header'>
-        <div className='score score--o'>
+      <header className={styles.ScoreLayout}>
+        <div
+          className={`${styles.Score} ${styles.Score_o}`}
+        >
           <OIcon />
           <p>{oWins} wins</p>
         </div>
-        <div className='score score--x'>
+        <div
+          className={`${styles.Score} ${styles.Score_x}`}
+        >
           <XIcon />
           <p>{xWins} wins</p>
         </div>
-        <div className='score'>
+        <div className={styles.Score}>
           <DrawIcon />
           <p>{draws} draws</p>
         </div>
