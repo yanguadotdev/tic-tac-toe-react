@@ -69,6 +69,7 @@ button {
   border: none;
   cursor: pointer;
   line-height: 1;
+  background-color: transparent;
 }
 
 body {
@@ -89,6 +90,7 @@ body:has(.ModalOpen) {
 .Game {
   background: hsl(var(--grey-700));
   width: min(100%, 350px);
+  min-width: 350px;
   margin: auto;
   text-align: center;
   padding: 2rem 1.5rem;

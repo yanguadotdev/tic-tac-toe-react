@@ -14,11 +14,15 @@ export function useGameState () {
     return value ? Number(value) : 0
   })
   const [winner, setWinner] = useState(null)
+  const [gameOver, setGameOver] = useState(false)
+
   const xIsNext = currentMove % 2 === 0
   const turn = xIsNext ? TURNS.X : TURNS.O
   const currentBoard = history[currentMove]
 
   return {
+    gameOver,
+    setGameOver,
     history,
     setHistory,
     currentMove,

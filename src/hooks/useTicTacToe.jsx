@@ -1,13 +1,16 @@
 import confetti from 'canvas-confetti'
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 
 import { saveInStorage, resetGameStorage, clearHistoryGame } from '../storage/index.js'
 import { checkWinnerFrom, checkEndGame } from '../logic/board.js'
 import { useGameState } from './useGameState.jsx'
 import { SoundContext } from '../context/soundContext.jsx'
+import { TURNS } from '../constants.js'
+import { getBestMove } from '../logic/minmax.js'
 
-export function useTicTacToe () {
+export function useTicTacToe ({ isSinglePlayer }) {
   const {
+    gameOver, setGameOver,
     history, setHistory,
     currentMove, setCurrentMove,
     turn, currentBoard,
@@ -57,19 +60,29 @@ export function useTicTacToe () {
     })
 
     const newWinner = checkWinnerFrom(newBoard)
+    const isGameOver = checkEndGame(newBoard)
+    setGameOver(isGameOver)
 
-    !newWinner && playSound(popSound)
-
+    !gameOver && playSound(popSound)
     // verificamos si hay ganador
     if (newWinner) {
       playSound(winnerSound)
       confetti()
       setWinner(newWinner)
-    } else if (checkEndGame(newBoard)) {
+    } else if (isGameOver) {
       playSound(winnerSound)
       setWinner(false)
     }
   }
+
+  useEffect(() => {
+    if (isSinglePlayer && turn === TURNS.O && !winner && !gameOver) {
+      const index = getBestMove(currentBoard, TURNS.O, TURNS.X)
+      setTimeout(() => {
+        updateBoard(index)
+      }, 1000)
+    }
+  }, [turn])
 
   return {
     board: currentBoard,
@@ -77,6 +90,7 @@ export function useTicTacToe () {
     startAgain,
     turn,
     winner,
+    setWinner,
     jumpTo,
     currentMove,
     history

@@ -1,0 +1,46 @@
+.SelectGameMode {
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.Marks {
+  display: flex;
+  gap: .5rem;
+
+  svg {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+.Options {
+  gap: .5rem;
+}
+
+.Button {
+  height: 48px;
+  border-radius: .75rem;
+  font-weight: 600;
+  font-size: 1.125rem;
+  outline: none;
+  padding-inline: 1.5rem;
+}
+
+.ModeSingle {
+  color: hsl(var(--grey-700));
+  --hue: 190;
+  --saturation: 86%;
+  --lightness-primary: 38%;
+  --lightness-shadow: 47%;
+  --lightness-border: 22%;
+  --lightness-outline: 55%;
+}
+
+.ModeMultiplayer {
+  --hue: 210;
+  --saturation: 83%;
+  --lightness-primary: 38%;
+  --lightness-shadow: 47%;
+  --lightness-border: 22%;
+  --lightness-outline: 55%;
+}

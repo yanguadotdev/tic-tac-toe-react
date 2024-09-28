@@ -5,7 +5,7 @@ import styles from '../styles/button.module.css'
 import footerStyles from '../styles/footer.module.css'
 import { SoundContext } from '../context/soundContext'
 
-export function Footer ({ resetGame }) {
+export function Footer ({ resetGame, gameMode }) {
   const { sound, updateSound: toggleSound } = useContext(SoundContext)
   return (
     <footer className={footerStyles.FooterGame}>
@@ -16,7 +16,7 @@ export function Footer ({ resetGame }) {
         <RepeatIcon />
       </button>
 
-      <span className={footerStyles.Label}>Multiplayer</span>
+      <span className={footerStyles.Label}>{gameMode}</span>
 
       <button
         className={`${styles.Button3D} ${styles.Button_primary}`}
