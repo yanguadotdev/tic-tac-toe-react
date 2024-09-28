@@ -1,6 +1,7 @@
 import { render, screen, cleanup, fireEvent } from '@testing-library/react'
 import { describe, it, expect, beforeEach } from 'vitest'
 import App from '../src/App'
+import { SoundProvider } from '../src/context/soundContext'
 
 describe('Tic Tac Toe App Flow', () => {
   beforeEach(() => {
@@ -8,7 +9,11 @@ describe('Tic Tac Toe App Flow', () => {
   })
 
   it('should simulate a full gameplay flow, including making moves, using undo/redo functionality, and ensuring the correct state updates', () => {
-    const { getByTestId } = render(<App />)
+    const { getByTestId } = render(
+      <SoundProvider>
+        <App />
+      </SoundProvider>
+    )
 
     const undoButton = screen.getByRole('button', { name: /undo/i })
     const redoButton = screen.getByRole('button', { name: /redo/i })
@@ -89,8 +94,11 @@ describe('Tic Tac Toe App Flow', () => {
 
   // ! For this to work you need to disable the confetti library, because canva doesn't work very well in a test environment or use Playwright and you can forget about this.
   it('should declare a winner when a player has three in a row', () => {
-    const { getByTestId, getByRole } = render(<App />)
-
+    const { getByTestId, getByRole } = render(
+      <SoundProvider>
+        <App />
+      </SoundProvider>
+    )
     const undo = getByRole('button', { name: /undo/i })
     const redo = getByRole('button', { name: /redo/i })
     expect(undo.disabled).toBe(false)
@@ -106,14 +114,15 @@ describe('Tic Tac Toe App Flow', () => {
     expect(iconSquare1.className).toBe('x-icon')
     expect(iconSquare3.className).toBe('o-icon')
 
-    const winnerModal = document.querySelector('.winner')
+    const winnerModal = document.querySelector('.ModalOpen')
     expect(winnerModal).toBeTruthy()
 
-    const scoreX = document.querySelector('.score--x')
-    const p = scoreX.querySelector('p')
-    expect(p.textContent).toBe('1 wins')
+    const score = document.getElementById('score')
+    console.log(score.textContent)
+    const scoreX = score.querySelector('p#score-x')
+    expect(scoreX.textContent).toBe('1 wins')
 
-    const restartBtn = winnerModal.querySelector('button.Button3D')
+    const restartBtn = winnerModal.querySelector('button#restartGame')
     expect(restartBtn).toBeTruthy()
     fireEvent.click(restartBtn)
 
