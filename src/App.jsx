@@ -27,7 +27,7 @@ function App () {
 
   return (
     <main
-      className={`Game board ${styles.Shadow_inset} ${utils.flex_col}`}
+      className={`Game ${styles.Shadow_inset} ${utils.flex_col}`}
     >
       <h1 className={utils.text_lg}>Tic Tac Toe</h1>
       <Score oWins={oWins} xWins={xWins} draws={draws} />
