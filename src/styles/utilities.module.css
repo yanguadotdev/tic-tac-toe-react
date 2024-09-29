@@ -17,3 +17,12 @@
   font-size: 2.5rem;
   font-weight: 800;
 }
+
+.text_xxl {
+  font-size: 3rem;
+  font-weight: 800;
+}
+
+.text_center {
+  text-align: center;
+}

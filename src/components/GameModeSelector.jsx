@@ -11,6 +11,12 @@ export default function GameModeSelector ({ onSelectMode }) {
 
   return (
     <main className={`${utils.flex_col} ${styles.SelectGameMode}`}>
+      <h1 className={`
+        ${utils.text_center}
+        ${styles.Title}`}
+      >
+        Tic Tac Toe
+      </h1>
       <div className={styles.Marks}>
         <div className='x-icon'>
           <XIcon />

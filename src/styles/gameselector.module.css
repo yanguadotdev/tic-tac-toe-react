@@ -1,16 +1,35 @@
+@import url('./animation.css');
+
 .SelectGameMode {
   align-items: center;
   gap: 1.5rem;
+  animation: bounceIn var(--drt-normal);
+  animation-timing-function: var(--bounce-bezier);
 }
 
 .Marks {
   display: flex;
-  gap: .5rem;
 
   svg {
-    width: 40px;
-    height: 40px;
+    width: 36px;
+    height: 36px;
   }
+}
+
+.Title {
+  color: hsl(var(--grey-300));
+  font-size: clamp(1.5rem, 12vw, 4.5rem);
+  font-weight: 800;
+  line-height: 1;
+  margin-bottom: 1rem;
+  text-shadow: 0 1px 0 hsl(var(--grey-100)),
+    0 2px 0 hsla(var(--grey-500), .5),
+    0 3px 0 hsla(var(--grey-500), .5),
+    0 4px 0 hsla(var(--grey-500), .5),
+    0 5px 0 hsla(var(--grey-500), .5),
+    0 6px 0 hsla(var(--grey-500), .5),
+    0 7px 0 hsla(var(--grey-500), .5),
+    0 8px 0 hsla(var(--grey-500), .5);
 }
 
 .Options {
@@ -18,10 +37,11 @@
 }
 
 .Button {
+  text-wrap: nowrap;
   height: 48px;
   border-radius: .75rem;
   font-weight: 600;
-  font-size: 1.125rem;
+  font-size: clamp(.875rem, 5vw, 1.125rem);
   outline: none;
   padding-inline: 1.5rem;
 }

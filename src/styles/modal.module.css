@@ -10,6 +10,7 @@
   place-items: center;
   background-color: hsla(var(--grey-800), .9);
   backdrop-filter: blur(2px);
+  pointer-events: all;
 }
 
 .Modal_content {

@@ -2,12 +2,14 @@ import { useScore } from '../hooks/useScore'
 import { useTicTacToe } from '../hooks/useTicTacToe'
 import styles from '../styles/shadow.module.css'
 import utils from '../styles/utilities.module.css'
+import game from '../styles/game.module.css'
 import { Board } from './Board'
 import { Footer } from './Footer'
 import { HistoryControls } from './HistoryControls'
 import { Score } from './Score'
 import { Turn } from './Turn'
 import { WinnerModal } from './WinnerModal'
+import { TURNS } from '../constants'
 
 export default function TicTacToeGame ({ isSinglePlayer }) {
   const {
@@ -26,19 +28,17 @@ export default function TicTacToeGame ({ isSinglePlayer }) {
 
   return (
     <main
-      className={`Game ${styles.Shadow_inset} ${utils.flex_col}`}
+      className={`${game.Game} ${styles.Shadow_inset} ${utils.flex_col}`}
+      style={{
+        pointerEvents: isSinglePlayer && turn === TURNS.O ? 'none' : 'all'
+      }}
     >
-      <h1 className={utils.text_lg}>Tic Tac Toe</h1>
       <Score oWins={oWins} xWins={xWins} draws={draws} />
-      {
-        !isSinglePlayer && (
-          <HistoryControls
-            history={history}
-            currentMove={currentMove}
-            jumpTo={jumpTo}
-          />
-        )
-      }
+      <HistoryControls
+        history={history}
+        currentMove={currentMove}
+        jumpTo={jumpTo}
+      />
       <Board
         board={board}
         updateBoard={updateBoard}

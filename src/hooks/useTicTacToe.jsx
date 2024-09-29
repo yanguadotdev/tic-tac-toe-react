@@ -33,7 +33,8 @@ export function useTicTacToe ({ isSinglePlayer }) {
   }
 
   const jumpTo = ({ to }) => {
-    const nextMove = to === 'next' ? currentMove + 1 : currentMove - 1
+    const step = isSinglePlayer ? 2 : 1
+    const nextMove = to === 'next' ? currentMove + step : currentMove - step
     if (nextMove < 0 || nextMove === history.length) return
     playSound(clickSound)
     setCurrentMove(nextMove)

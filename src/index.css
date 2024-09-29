@@ -3,6 +3,8 @@
   --grey-800: 202, 32%, 15%;
   --grey-700: 200, 26%, 18%;
   --grey-600: 199, 35%, 19%;
+  --grey-500: 199, 35%, 28%;
+  --grey-400: 199, 35%, 40%;
   --grey-300: 209, 22%, 45%;
   --grey-100: 209, 22%, 78%;
   --light: 198, 56%, 86%;
@@ -85,18 +87,6 @@ body {
 
 body:has(.ModalOpen) {
   overflow: hidden;
-}
-
-.Game {
-  background: hsl(var(--grey-700));
-  width: min(100%, 350px);
-  min-width: 350px;
-  margin: auto;
-  text-align: center;
-  padding: 2rem 1.5rem;
-  border-radius: 1rem;
-  /* INCLUDE: utilities.flex_col */
-  gap: .75rem;
 }
 
 .o-icon {
