@@ -11,5 +11,11 @@ export const checkWinnerFrom = (boardToCheck) => {
 }
 
 export const checkEndGame = (boardToCheck) => {
-  return boardToCheck.every(cell => cell != null)
+  return !boardToCheck.includes(null)
+}
+
+export const getAvailableMoves = (boardToCheck) => {
+  return boardToCheck
+    .map((cell, index) => cell === null ? index : null)
+    .filter(cell => cell !== null)
 }

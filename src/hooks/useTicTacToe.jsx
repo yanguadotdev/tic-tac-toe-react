@@ -81,7 +81,7 @@ export function useTicTacToe ({ isSinglePlayer }) {
       const index = getBestMove(currentBoard, TURNS.O, TURNS.X)
       setTimeout(() => {
         updateBoard(index)
-      }, 1000)
+      }, 800)
     }
   }, [turn])
 
