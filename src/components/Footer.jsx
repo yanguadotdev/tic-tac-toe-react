@@ -1,12 +1,13 @@
-import { useContext } from 'react'
-
-import { AllowSoundIcon, NotAllowSoundIcon, RepeatIcon } from './Icons'
+import { RepeatIcon, RestartIcon } from './Icons'
 import styles from '../styles/button.module.css'
 import footerStyles from '../styles/footer.module.css'
-import { SoundContext } from '../context/soundContext'
 
-export function Footer ({ resetGame, gameMode }) {
-  const { sound, updateSound: toggleSound } = useContext(SoundContext)
+export function Footer ({ resetScore, startAgain, gameMode }) {
+  const resetGame = () => {
+    startAgain()
+    resetScore()
+  }
+
   return (
     <footer className={footerStyles.FooterGame}>
       <button
@@ -20,9 +21,11 @@ export function Footer ({ resetGame, gameMode }) {
 
       <button
         className={`${styles.Button3D} ${styles.Button_primary}`}
-        onClick={toggleSound}
+        onClick={startAgain}
+        aria-label='Start again'
+        id='restart'
       >
-        {sound ? <AllowSoundIcon /> : <NotAllowSoundIcon />}
+        <RestartIcon />
       </button>
 
     </footer>

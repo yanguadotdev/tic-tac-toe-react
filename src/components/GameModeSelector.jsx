@@ -1,11 +1,17 @@
+import { useContext } from 'react'
+import { SoundContext } from '../context/soundContext'
+
 import { OIcon, XIcon } from './Icons'
 import styles from '../styles/gameselector.module.css'
 import utils from '../styles/utilities.module.css'
 import buttons from '../styles/button.module.css'
 import { GAME_MODE } from '../constants'
+import Setting from './Setting'
 
 export default function GameModeSelector ({ onSelectMode }) {
+  const { playSound, clickSound } = useContext(SoundContext)
   const handleClick = (mode) => {
+    playSound(clickSound)
     onSelectMode(mode)
   }
 
@@ -49,6 +55,8 @@ export default function GameModeSelector ({ onSelectMode }) {
           NEW GAME (VS PLAYER)
         </button>
       </div>
+
+      <Setting />
     </main>
   )
 }

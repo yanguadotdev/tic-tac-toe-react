@@ -33,8 +33,8 @@ export function WinnerModal ({ winner, startAgain }) {
           <button
             className={`${styles.Button3D} ${styles.Button_fitContent} ${styles.Button_primary}`}
             onClick={startAgain}
-            aria-label='Restart the game'
-            id='restartGame'
+            aria-label='Start again'
+            id='restart'
           >
             <RestartIcon /> Start again
           </button>

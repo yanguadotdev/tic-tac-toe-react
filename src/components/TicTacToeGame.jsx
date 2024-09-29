@@ -20,11 +20,7 @@ export default function TicTacToeGame ({ setGameMode, isSinglePlayer }) {
     currentMove,
     history
   } = useTicTacToe({ isSinglePlayer })
-  const { oWins, xWins, draws } = useScore({ winner })
-
-  const resetGame = () => {
-    startAgain()
-  }
+  const { oWins, xWins, draws, resetScore } = useScore({ winner })
 
   const backHome = () => {
     setGameMode('')
@@ -51,7 +47,8 @@ export default function TicTacToeGame ({ setGameMode, isSinglePlayer }) {
       />
       <Turn turn={turn} />
       <Footer
-        resetGame={resetGame}
+        resetScore={resetScore}
+        startAgain={startAgain}
         gameMode={isSinglePlayer ? 'Against IA' : 'Multiplayer'}
       />
 
