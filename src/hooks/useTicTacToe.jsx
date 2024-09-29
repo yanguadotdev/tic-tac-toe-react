@@ -1,7 +1,7 @@
 import confetti from 'canvas-confetti'
 import { useContext, useEffect } from 'react'
 
-import { saveInStorage, resetGameStorage, clearHistoryGame } from '../storage/index.js'
+import { resetGameStorage } from '../storage/index.js'
 import { checkWinnerFrom, checkEndGame } from '../logic/board.js'
 import { useGameState } from './useGameState.jsx'
 import { SoundContext } from '../context/soundContext.jsx'
@@ -29,7 +29,7 @@ export function useTicTacToe ({ isSinglePlayer }) {
     setWinner(null)
     // Limpiar storage
     resetGameStorage()
-    clearHistoryGame({ keys: ['history', 'move'] })
+    // clearHistoryGame({ keys: ['history', 'move'] })
   }
 
   const jumpTo = ({ to }) => {
@@ -46,19 +46,20 @@ export function useTicTacToe ({ isSinglePlayer }) {
     const newBoard = [...currentBoard]
     newBoard[index] = turn
 
-    // Guardar historial
+    // Update history
     const nextHistory = [...history.slice(0, currentMove + 1), newBoard]
     setHistory(nextHistory)
     const nextMove = nextHistory.length - 1
     setCurrentMove(nextMove)
 
-    // Guardamos partida
-    saveInStorage({
-      data: {
-        move: nextMove,
-        history: nextHistory
-      }
-    })
+    // * Commented out localStorage saving to improve UX.
+    // * 👇 Persisting game state after refresh was deemed confusing for players.
+    // saveInStorage({
+    //   data: {
+    //     move: nextMove,
+    //     history: nextHistory
+    //   }
+    // })
 
     const newWinner = checkWinnerFrom(newBoard)
     const isGameOver = checkEndGame(newBoard)
