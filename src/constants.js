@@ -25,3 +25,9 @@ export const GAME_MODE = {
   SINGLE: 'single',
   MULTIPLAYER: 'multiplayer'
 }
+
+export const DIFFICULTY = {
+  EASY: 'Easy',
+  NORMAL: 'Normal',
+  HARD: 'Hard'
+}

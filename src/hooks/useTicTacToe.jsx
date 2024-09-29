@@ -6,7 +6,8 @@ import { checkWinnerFrom, checkEndGame } from '../logic/board.js'
 import { useGameState } from './useGameState.jsx'
 import { SoundContext } from '../context/soundContext.jsx'
 import { TURNS } from '../constants.js'
-import { getBestMove } from '../logic/minmax.js'
+import { getBestMove } from '../logic/minimax.js'
+import { DifficultyContext } from '../context/difficultyContext.jsx'
 
 export function useTicTacToe ({ isSinglePlayer }) {
   const {
@@ -21,6 +22,8 @@ export function useTicTacToe ({ isSinglePlayer }) {
     playSound,
     popSound, winnerSound, clickSound
   } = useContext(SoundContext)
+
+  const { difficulty } = useContext(DifficultyContext)
 
   const startAgain = () => {
     playSound(clickSound)
@@ -78,11 +81,16 @@ export function useTicTacToe ({ isSinglePlayer }) {
   }
 
   useEffect(() => {
+    let timeout
     if (isSinglePlayer && turn === TURNS.O && !winner && !gameOver) {
-      const index = getBestMove(currentBoard, TURNS.O, TURNS.X)
-      setTimeout(() => {
+      const index = getBestMove(currentBoard, TURNS.O, TURNS.X, difficulty)
+      timeout = setTimeout(() => {
         updateBoard(index)
       }, 800)
+    }
+
+    return () => {
+      timeout && clearTimeout(timeout)
     }
   }, [turn])
 
