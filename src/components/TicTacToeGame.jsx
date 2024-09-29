@@ -11,7 +11,7 @@ import { Turn } from './Turn'
 import { WinnerModal } from './WinnerModal'
 import { TURNS } from '../constants'
 
-export default function TicTacToeGame ({ isSinglePlayer }) {
+export default function TicTacToeGame ({ setGameMode, isSinglePlayer }) {
   const {
     board, updateBoard,
     startAgain,
@@ -23,6 +23,11 @@ export default function TicTacToeGame ({ isSinglePlayer }) {
   const { oWins, xWins, draws } = useScore({ winner })
 
   const resetGame = () => {
+    startAgain()
+  }
+
+  const backHome = () => {
+    setGameMode('')
     startAgain()
   }
 
@@ -38,6 +43,7 @@ export default function TicTacToeGame ({ isSinglePlayer }) {
         history={history}
         currentMove={currentMove}
         jumpTo={jumpTo}
+        backHome={backHome}
       />
       <Board
         board={board}

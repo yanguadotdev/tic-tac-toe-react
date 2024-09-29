@@ -64,7 +64,7 @@ export function useTicTacToe ({ isSinglePlayer }) {
     const isGameOver = checkEndGame(newBoard)
     setGameOver(isGameOver)
 
-    !gameOver && playSound(popSound)
+    !isGameOver && playSound(popSound)
     // verificamos si hay ganador
     if (newWinner) {
       playSound(winnerSound)

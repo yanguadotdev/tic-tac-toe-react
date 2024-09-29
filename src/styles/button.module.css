@@ -49,10 +49,24 @@
   --lightness-shadow: 47%;
   --lightness-border: 25%;
   --lightness-outline: 62%;
+  width: 48px;
+  height: 48px;
 }
 
 .Button_fitContent {
   width: auto;
   height: auto;
   padding: .5rem .75rem;
+}
+
+.Button_home {
+  outline: none;
+  --hue: 39;
+  --saturation: 88%;
+  --lightness-primary: 58%;
+  --lightness-shadow: 47%;
+  --lightness-border: 25%;
+  --lightness-outline: 62%;
+  width: 48px;
+  height: 48px;
 }

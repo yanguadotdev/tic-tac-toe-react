@@ -3,13 +3,12 @@
 .Game {
   background: hsl(var(--grey-700));
   width: min(100%, 350px);
-  min-width: 350px;
   margin: auto;
   text-align: center;
   padding: 2rem 1.5rem;
   border-radius: 1rem;
   /* INCLUDE: utilities.flex_col */
-  gap: .75rem;
+  gap: .5rem;
 
   animation: bounceIn var(--drt-normal);
   animation-timing-function: var(--bounce-bezier);

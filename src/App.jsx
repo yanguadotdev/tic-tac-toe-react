@@ -11,7 +11,10 @@ function App () {
     <>
       {!gameMode
         ? <GameModeSelector onSelectMode={setGameMode} />
-        : <TicTacToeGame isSinglePlayer={gameMode === GAME_MODE.SINGLE} />}
+        : <TicTacToeGame
+            setGameMode={setGameMode}
+            isSinglePlayer={gameMode === GAME_MODE.SINGLE}
+          />}
     </>
   )
 }
