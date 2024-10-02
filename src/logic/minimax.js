@@ -16,13 +16,14 @@ export function getBestMove (board, aiPlayer, humanPlayer, difficulty) {
    * @param {number} depth - Current depth of the recursion
    * @returns {number} - The score of the best play
    */
-  const minimax = (board, isMaximizing, depth = 0) => {
+  const minimax = (board, isMaximizing, depth = 0, maxDepth = Infinity) => {
     const winner = checkWinner(board)
 
-    // Base case: exists winner or draw
+    // Base case: exists winner, draw or reached depth limit
     if (winner === aiPlayer) return 10 - depth // prefer quicker wins
-    if (winner === humanPlayer) return depth - 10 // prefer longer losses
-    if (winner === 'draw') return 0 // exists draw
+    if (winner === humanPlayer) return depth - 10 // prefer slower losses
+    if (winner === 'draw') return 0
+    if (depth >= maxDepth) return 0 // Limit depth in normal mode
 
     const availableMoves = getAvailableMoves(board)
 
@@ -30,7 +31,7 @@ export function getBestMove (board, aiPlayer, humanPlayer, difficulty) {
       let bestScore = -Infinity
       for (const move of availableMoves) {
         board[move] = aiPlayer // Make the play
-        const score = minimax(board, false, depth + 1) // Recursive to minimize
+        const score = minimax(board, false, depth + 1, maxDepth) // Recursive to minimize
         board[move] = null // Undo the play
         bestScore = Math.max(score, bestScore) // Search the max score
       }
@@ -39,7 +40,7 @@ export function getBestMove (board, aiPlayer, humanPlayer, difficulty) {
       let bestScore = Infinity
       for (const move of availableMoves) {
         board[move] = humanPlayer
-        const score = minimax(board, true, depth + 1)
+        const score = minimax(board, true, depth + 1, maxDepth)
         board[move] = null
         bestScore = Math.min(score, bestScore)
       }
@@ -48,7 +49,7 @@ export function getBestMove (board, aiPlayer, humanPlayer, difficulty) {
   }
 
   /**
-   * Determine the best play for the IA
+   * Determine the best play for the IA based on the selected difficulty
    * @returns {number} - Index of the best play
    */
   const bestMove = () => {
@@ -59,14 +60,13 @@ export function getBestMove (board, aiPlayer, humanPlayer, difficulty) {
     for (const currentMove of availableMoves) {
       board[currentMove] = aiPlayer // Make the play
 
-      // Based on difficulty, limit depth or skip Minimax
       let score
       if (difficulty === DIFFICULTY.EASY) {
         score = Math.random() // Random moves in easy mode
       } else if (difficulty === DIFFICULTY.NORMAL) {
-        score = minimax(board, false, 0) // Use minimax with normal depth
+        score = minimax(board, false, 0, 4)
       } else { // 'hard'
-        score = minimax(board, false) // Full minimax in hard mode
+        score = minimax(board, false, 0)
       }
 
       board[currentMove] = null // Undo the play
