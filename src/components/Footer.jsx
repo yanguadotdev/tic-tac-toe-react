@@ -1,8 +1,10 @@
+import React from 'react'
+
 import { RepeatIcon, RestartIcon } from './Icons'
 import styles from '../styles/button.module.css'
 import footerStyles from '../styles/footer.module.css'
 
-export function Footer ({ resetScore, startAgain, gameMode }) {
+function Footer ({ resetScore, startAgain, gameMode }) {
   const resetGame = () => {
     startAgain()
     resetScore()
@@ -31,3 +33,5 @@ export function Footer ({ resetScore, startAgain, gameMode }) {
     </footer>
   )
 }
+
+export default React.memo(Footer)

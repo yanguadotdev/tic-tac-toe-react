@@ -64,7 +64,7 @@ export function getBestMove (board, aiPlayer, humanPlayer, difficulty) {
       if (difficulty === DIFFICULTY.EASY) {
         score = Math.random() // Random moves in easy mode
       } else if (difficulty === DIFFICULTY.NORMAL) {
-        score = minimax(board, false, 0, 4)
+        score = minimax(board, false, 0, 5)
       } else { // 'hard'
         score = minimax(board, false, 0)
       }

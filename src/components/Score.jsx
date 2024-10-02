@@ -1,7 +1,9 @@
+import React from 'react'
+
 import { DrawIcon, OIcon, XIcon } from './Icons'
 import styles from '../styles/score.module.css'
 
-export function Score ({ oWins, xWins, draws }) {
+function Score ({ oWins, xWins, draws }) {
   return (
     <>
       <header id='score' className={styles.ScoreLayout} aria-label='Game Score' aria-live='assertive'>
@@ -29,3 +31,5 @@ export function Score ({ oWins, xWins, draws }) {
     </>
   )
 }
+
+export default React.memo(Score)

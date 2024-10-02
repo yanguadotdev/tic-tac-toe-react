@@ -1,5 +1,5 @@
 import confetti from 'canvas-confetti'
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useCallback } from 'react'
 
 import { resetGameStorage } from '../storage/index.js'
 import { checkWinnerFrom, checkEndGame } from '../logic/board.js'
@@ -25,7 +25,7 @@ export function useTicTacToe ({ isSinglePlayer }) {
 
   const { difficulty } = useContext(DifficultyContext)
 
-  const startAgain = () => {
+  const startAgain = useCallback(() => {
     playSound(clickSound)
     setHistory([Array(9).fill(null)])
     setCurrentMove(0)
@@ -34,6 +34,7 @@ export function useTicTacToe ({ isSinglePlayer }) {
     resetGameStorage()
     // clearHistoryGame({ keys: ['history', 'move'] })
   }
+  , [])
 
   const jumpTo = ({ to }) => {
     const step = isSinglePlayer ? 2 : 1
