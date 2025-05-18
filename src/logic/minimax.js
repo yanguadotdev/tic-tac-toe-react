@@ -14,6 +14,7 @@ export function getBestMove (board, aiPlayer, humanPlayer, difficulty) {
   /**
    * @param {boolean} isMaximizing - Indicates if it is the turn of IA or Human player
    * @param {number} depth - Current depth of the recursion
+   * @param {number} maxDepth - Maximum depth for the recursion
    * @returns {number} - The score of the best play
    */
   const minimax = (board, isMaximizing, depth = 0, maxDepth = Infinity) => {
