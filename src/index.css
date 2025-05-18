@@ -92,6 +92,7 @@ body {
   color: hsl(var(--grey-300));
   font-family: 'Rubik', sans-serif;
   padding: 1.5rem 1rem;
+  overflow-x: hidden;
 }
 
 body:has(.ModalOpen) {
